@@ -30,6 +30,11 @@ describe Oystercard do
       it "sets entry station using new instance of journey" do
         expect(oystercard.touch_in(entry_station)).to eq entry_station
       end
+
+      it "creates a new instance of Journey" do
+        oystercard.touch_in(entry_station)
+        expect(oystercard.journey).to be_instance_of(Journey)
+      end
     end
 
     describe "#touch_out" do
@@ -40,11 +45,10 @@ describe Oystercard do
         expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_BALANCE)
       end
 
-      let(:journey) {double("journey")}
       it "stores current journey in array" do
         oystercard.touch_in(entry_station)
         oystercard.touch_out(exit_station)
-        expect(oystercard.journey_history).to include(journey)
+        expect(oystercard.journey_history.last).to be_instance_of(Journey)
       end
     end
   end
