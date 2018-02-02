@@ -24,22 +24,21 @@ describe Oystercard do
   end
 
   context "when oystercard meets minimum balance" do
-    before(:each){oystercard.top_up(Oystercard::MINIMUM_BALANCE)}
+    before(:each){oystercard.top_up(20)}
 
     describe "#touch_in" do
-      it "sets entry station using new instance of journey" do
-        expect(oystercard.touch_in(entry_station)).to eq entry_station
-      end
-
       it "creates a new instance of Journey" do
         oystercard.touch_in(entry_station)
         expect(oystercard.journey).to be_instance_of(Journey)
       end
+
+      it "deducts penalty fare from card balance" do
+        oystercard.touch_in(entry_station)
+        expect{oystercard.touch_in(entry_station)}.to change{oystercard.balance}.by(-Oystercard::PENALTY)
+      end
     end
 
     describe "#touch_out" do
-    #   before(:each){oystercard.touch_in(entry_station)}
-
       it "deducts normal fare from the card balance" do
         oystercard.touch_in(entry_station)
         expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_BALANCE)

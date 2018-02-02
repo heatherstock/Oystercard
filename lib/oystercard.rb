@@ -22,16 +22,17 @@ class Oystercard
 
   def touch_in(entry_station)
     raise "Minimum balance not met" if @balance < MINIMUM_BALANCE
+    @balance -= PENALTY if @journey != nil 
     @journey = Journey.new
     @journey.start(entry_station)
   end
 
   def touch_out(exit_station)
-    # deduct(MINIMUM_BALANCE)
     @journey = Journey.new if @journey == nil
     @journey.finish(exit_station)
-    deduct(@journey.fare)
+    deduct(@journey.exit_fare)
     save_journey
+    @journey = nil
   end
 
   private

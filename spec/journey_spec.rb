@@ -44,10 +44,15 @@ describe Journey do
     end
   end
 
-  describe "#fare" do
-    it "calculates fare - normal or penalty" do
+  describe "#exit_fare" do
+    it "calculates penalty fare at exit station" do
       journey.finish(exit_station)
-      expect(journey.fare).to eq Journey::PENALTY
+      expect(journey.exit_fare).to eq Journey::PENALTY
+    end
+    it "calculates normal fare at exit station" do
+      journey.start(entry_station)
+      journey.finish(exit_station)
+      expect(journey.exit_fare).to eq Journey::MINIMUM_BALANCE
     end
   end
 end

@@ -24,11 +24,10 @@ class Journey
     @complete
   end
 
-  def fare
+  def exit_fare
     @entry_station == nil && @exit_station != nil ? PENALTY : MINIMUM_BALANCE
   end
-
-
+  
 private
 
   def change_complete_status
