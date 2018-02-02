@@ -21,9 +21,9 @@ class Journey
     @complete
   end
 
-  def current_journey
-    {:entry_station => @entry_station, :exit_station => @exit_station}
-  end
+  # def current_journey
+  #   {:entry_station => @entry_station, :exit_station => @exit_station}
+  # end
 
 private
 

@@ -40,11 +40,11 @@ describe Oystercard do
         expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_BALANCE)
       end
 
-      let(:current_journey) { {entry_station: entry_station, exit_station: exit_station }}
-      it "stores current journey hash in array" do
+      let(:journey) {double("journey")}
+      it "stores current journey in array" do
         oystercard.touch_in(entry_station)
         oystercard.touch_out(exit_station)
-        expect(oystercard.journey_history).to include(current_journey)
+        expect(oystercard.journey_history).to include(journey)
       end
     end
   end

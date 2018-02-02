@@ -45,7 +45,7 @@ class Oystercard
   end
 
   def save_journey
-    @journey_history << @journey.current_journey
+    @journey_history << @journey
   end
 
 end
