@@ -23,15 +23,12 @@ class Oystercard
     raise "Minimum balance not met" if @balance < MINIMUM_BALANCE
     @journey = Journey.new
     @journey.start(entry_station)
-    # return value of line 23 is entry_station
-    # @entry_station = entry_station
   end
 
   def touch_out(exit_station)
     raise "Not yet in journey" if @journey == nil
     deduct(MINIMUM_BALANCE)
     @journey.finish(exit_station)
-    # @exit_station = exit_station
     save_journey
   end
 
