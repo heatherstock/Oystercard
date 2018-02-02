@@ -1,5 +1,8 @@
 class Journey
 
+  MINIMUM_BALANCE = 1
+  PENALTY = MINIMUM_BALANCE * 6
+
   attr_reader :entry_station, :exit_station, :in_journey
 
   def initialize
@@ -21,6 +24,11 @@ class Journey
     @complete
   end
 
+  def fare
+    @entry_station == nil && @exit_station != nil ? PENALTY : MINIMUM_BALANCE
+  end
+
+
 private
 
   def change_complete_status
@@ -28,6 +36,5 @@ private
       @complete = true
     end
   end
-
 
 end

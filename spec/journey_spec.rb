@@ -43,4 +43,11 @@ describe Journey do
       end
     end
   end
+
+  describe "#fare" do
+    it "calculates fare - normal or penalty" do
+      journey.finish(exit_station)
+      expect(journey.fare).to eq Journey::PENALTY
+    end
+  end
 end

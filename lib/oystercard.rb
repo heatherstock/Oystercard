@@ -6,6 +6,7 @@ class Oystercard
   DEFAULT_BALANCE = 0
   MINIMUM_BALANCE = 1
   DEFAULT_LIMIT = 90
+  PENALTY = MINIMUM_BALANCE * 6
   attr_reader :balance, :journey_history, :journey
 
   def initialize(balance = DEFAULT_BALANCE)
@@ -26,9 +27,10 @@ class Oystercard
   end
 
   def touch_out(exit_station)
-    raise "Not yet in journey" if @journey == nil
-    deduct(MINIMUM_BALANCE)
+    # deduct(MINIMUM_BALANCE)
+    @journey = Journey.new if @journey == nil
     @journey.finish(exit_station)
+    deduct(@journey.fare)
     save_journey
   end
 

@@ -38,11 +38,15 @@ describe Oystercard do
     end
 
     describe "#touch_out" do
-      before(:each){oystercard.touch_in(entry_station)}
+    #   before(:each){oystercard.touch_in(entry_station)}
 
-      it "deducts fare from the card balance" do
+      it "deducts normal fare from the card balance" do
         oystercard.touch_in(entry_station)
         expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::MINIMUM_BALANCE)
+      end
+
+      it "deducts penalty fare from the card balance" do
+        expect{oystercard.touch_out(exit_station)}.to change{oystercard.balance}.by(-Oystercard::PENALTY)
       end
 
       it "stores current journey in array" do
@@ -74,10 +78,4 @@ describe Oystercard do
     end
   end
 
-    describe "#touch_out" do
-    it "raises error if card hasn't been touched in" do
-      error_message = "Not yet in journey"
-      expect { oystercard.touch_out(exit_station) }.to raise_error error_message
-    end
-  end
 end
