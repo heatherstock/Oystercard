@@ -7,7 +7,7 @@ describe Journey do
   let(:exit_station) {double('exit_station')}
 
   context 'when initialized' do
-    it "registers an entry station" do
+    it 'registers an entry station' do
       expect(journey.entry_station).to eq nil
     end
 
@@ -44,12 +44,12 @@ describe Journey do
     end
   end
 
-  describe "#exit_fare" do
+  describe '#exit_fare' do
     it "calculates penalty fare at exit station" do
       journey.finish(exit_station)
       expect(journey.exit_fare).to eq Journey::PENALTY
     end
-    it "calculates normal fare at exit station" do
+    it 'calculates normal fare at exit station' do
       journey.start(entry_station)
       journey.finish(exit_station)
       expect(journey.exit_fare).to eq Journey::MINIMUM_BALANCE

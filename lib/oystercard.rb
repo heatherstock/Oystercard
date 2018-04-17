@@ -1,5 +1,5 @@
-require_relative "station"
-require_relative "journey"
+require_relative 'station'
+require_relative 'journey'
 
 class Oystercard
 
@@ -21,7 +21,7 @@ class Oystercard
   end
 
   def touch_in(entry_station)
-    raise "Minimum balance not met" if @balance < MINIMUM_BALANCE
+    raise 'Minimum balance not met' if @balance < MINIMUM_BALANCE
     entry_fare
     @journey = Journey.new
     @journey.start(entry_station)
@@ -52,5 +52,4 @@ class Oystercard
   def save_journey
     @journey_history << @journey
   end
-
 end

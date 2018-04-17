@@ -35,5 +35,4 @@ private
       @complete = true
     end
   end
-
 end
